@@ -1,24 +1,29 @@
-import logo from './logo.svg';
 import './App.css';
 
+import {I18nProvider, LOCALES} from './i18n';
+import translate from './i18n/translate'
+import { useState } from 'react';
 function App() {
+   
+  const [locale,setLocale] = useState(LOCALES.ENGLISH)
   return (
+    <I18nProvider locale={locale}>
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        {translate("hello")}
+        
+        
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+        {translate("edit",{path: <code>src/App.js</code>} )}
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        
+        <hr/>
+        <button class="item" onClick={()=>setLocale(LOCALES.ENGLISH)}>English</button>
+        <button class="item"  onClick={()=>setLocale(LOCALES.FRENCH)}>French</button>
+        
       </header>
     </div>
+    </I18nProvider>
   );
 }
 
